@@ -1,6 +1,11 @@
 import React from "react";
+import { Video } from "../types/Video";
 
-const VideoDetail = ({ video }) => {
+type Props = {
+  video: Video | null;
+};
+
+const VideoDetail: React.FC<Props> = ({ video }) => {
   if (!video) {
     return <div>Loading...</div>;
   }
