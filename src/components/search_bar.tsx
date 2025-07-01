@@ -13,6 +13,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchTermChange }) => {
     <div className="search-bar">
       <input
         value={term}
+        placeholder="Search..."
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const newTerm = event.target.value;
           setTerm(newTerm);
@@ -20,7 +21,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchTermChange }) => {
         }}
       />
     </div>
-  )
-}
+  );
+};
 
 export default SearchBar;

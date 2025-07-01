@@ -1,75 +1,111 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import _ from "lodash";
 import YTSearch from "youtube-api-search";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./store";
+import { setSelectedVideo, setVideos } from "./store/videoSlice";
+import { setComments, setReplies } from "./store/commentSlice";
 import SearchBar from "./components/search_bar";
 import VideoList from "./components/video_list";
 import VideoDetail from "./components/video_detail";
 import { Video } from "./types/Video";
-import { Comment } from "./types/Comment";
 import "./App.css";
 
 const API_KEY = "AIzaSyB-4dLf3A0iDeQBmWdLM1PGlHwgdL1zeMc";
 
 const App: React.FC = () => {
-  // Initializes component state
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-  const [comments, setComments] = useState<Comment[]>([]);
+  const dispatch = useDispatch();
+  // Redux state selectors
+  const videos = useSelector((state: RootState) => state.video.videos);
+  const selectedVideo = useSelector(
+    (state: RootState) => state.video.selectedVideo
+  );
+  const comments = useSelector((state: RootState) => state.comments.comments);
+  const replies = useSelector((state: RootState) => state.comments.replies);
 
-  // Function that gets the search-term and fetches videos
-  const fetchVideos = (term: string) => {
-    YTSearch({ key: API_KEY, term }, (videos: Video[]) => {
-      console.log("videos", videos);
-      setVideos(videos);
-      if (videos.length > 0) {
-        setSelectedVideo(videos[0]);
-      } else {
-        setSelectedVideo(null); // Clear selectedVideo if no results
+  // Fetch videos based on search term
+  const fetchVideos = useCallback(
+    (term: string) => {
+      YTSearch({ key: API_KEY, term }, (videos: Video[]) => {
+        dispatch(setVideos(videos));
+        if (videos.length > 0) {
+          dispatch(setSelectedVideo(videos[0]));
+        } else {
+          dispatch(setSelectedVideo(null));
+        }
+      });
+    },
+    [dispatch]
+  );
+
+  // Fetch comments for the selected video
+  const fetchComments = useCallback(
+    async (videoId: string) => {
+      try {
+        const response = await fetch(
+          `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${API_KEY}`
+        );
+        const data = await response.json();
+        dispatch(setComments(data.items || []));
+      } catch (error) {
+        console.error("Error fetching comments:", error);
       }
-    });
-  };
+    },
+    [dispatch]
+  );
 
-  // Fetches the list of comments for a given YouTube video ID using
-  const fetchComments = async (videoId: string) => {
+  // Fetch replies for a given comment
+  const fetchReplies = async (parentId: string) => {
     try {
+      if (replies[parentId]) return;
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${API_KEY}`
+        `https://www.googleapis.com/youtube/v3/comments?part=snippet&parentId=${parentId}&key=${API_KEY}`
       );
       const data = await response.json();
-      setComments(data.items || []);
+      dispatch(setReplies({ parentId, replies: data.items || [] }));
     } catch (error) {
-      console.error("Error fetching comments:", error);
+      console.error("Error fetching replies:", error);
     }
   };
 
-  // Debounced search function to avoid too many requests on fast typing
+  /// Debounced video search (300ms)
   const videoSearch = useMemo(
     () =>
       _.debounce((term: string) => {
         fetchVideos(term);
       }, 300),
-    []
+    [fetchVideos]
   );
 
-  // Initial search when component mounts
+  // Initial video load
   useEffect(() => {
     videoSearch("liverpool");
   }, [videoSearch]);
 
-  // Fetch comments whenever selected video changes
+  // Fetch comments when selected video changes
   useEffect(() => {
     if (selectedVideo) {
       fetchComments(selectedVideo.id.videoId);
     }
-  }, [selectedVideo]);
+  }, [selectedVideo, fetchComments]);
 
   return (
     <div>
+      {/* Search bar */}
       <SearchBar onSearchTermChange={videoSearch} />
-      <VideoDetail video={selectedVideo} commentList={comments} />
+
+      {/* Video detail with comments and replies */}
+      <VideoDetail
+        video={selectedVideo}
+        commentList={comments}
+        replies={replies}
+        fetchReplies={fetchReplies}
+      />
+
+      {/* Video list */}
       <VideoList
         videos={videos}
-        onVideoSelect={(video: Video) => setSelectedVideo(video)}
+        onVideoSelect={(video: Video) => dispatch(setSelectedVideo(video))}
       />
     </div>
   );
