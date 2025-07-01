@@ -1,4 +1,4 @@
-export type Video = {
+export interface Video {
   etag: string;
   id: {
     videoId: string;
@@ -12,4 +12,4 @@ export type Video = {
       high?: { url: string };
     };
   };
-};
+}
