@@ -27,6 +27,10 @@ const App: React.FC = () => {
   const fetchVideos = useCallback(
     (term: string) => {
       YTSearch({ key: API_KEY, term }, (videos: Video[]) => {
+        if (!videos) {
+          alert("Error fetching videos. Please try again.");
+          return;
+        }
         dispatch(setVideos(videos));
         if (videos.length > 0) {
           dispatch(setSelectedVideo(videos[0]));
@@ -46,9 +50,11 @@ const App: React.FC = () => {
           `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${API_KEY}`
         );
         const data = await response.json();
+        if (!response.ok)
+          throw new Error(data.error?.message || "Error fetching comments");
         dispatch(setComments(data.items || []));
       } catch (error) {
-        console.error("Error fetching comments:", error);
+        alert("Failed to load comments. Try again later.");
       }
     },
     [dispatch]
