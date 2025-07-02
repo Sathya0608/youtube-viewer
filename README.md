@@ -1,4 +1,4 @@
-# 🎥 YouTube Viewer — Enhanced Version
+# YouTube Viewer — Enhanced Version
 
 This is an extended version of the YouTube Viewer starter project.
 → Built with **React**, **Redux Toolkit**, **TypeScript**, and **Hooks**.
@@ -6,19 +6,19 @@ This is an extended version of the YouTube Viewer starter project.
 
 ---
 
-## 🚀 Features Added
+## Features Added
 
-- ✅ Search and play YouTube videos.
-- ✅ View **comments** for each selected video.
-- ✅ Expand/collapse **replies** for each comment.
-- ✅ Sort comments by **Top Comments** or **Newest First**.
-- ✅ Converted the entire app to **TypeScript** for type safety.
-- ✅ Refactored to use **React Hooks** and **Redux Toolkit** for state management.
-- ✅ Structured for a production-ready approach.
+- Search and play YouTube videos.
+- View **comments** for each selected video.
+- Expand/collapse **replies** for each comment.
+- Sort comments by **Top Comments** or **Newest First**.
+- Converted the entire app to **TypeScript** for type safety.
+- Refactored to use **React Hooks** and **Redux Toolkit** for state management.
+- Structured for a production-ready approach.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - React
 - Redux Toolkit
@@ -27,7 +27,7 @@ This is an extended version of the YouTube Viewer starter project.
 
 ---
 
-## 📆 Getting Started
+## Getting Started
 
 ### 1️⃣ Clone the repository:
 
@@ -63,7 +63,7 @@ AIzaSyCbcQMTPqAevOao2BQsQadm5SFTZljP2dM
 
 ---
 
-## 🔥 Run the Project:
+## Run the Project:
 
 ```bash
 yarn start
@@ -75,7 +75,7 @@ Open [http://localhost:3000](http://localhost:3000) or [http://127.0.0.1:3000](h
 
 ---
 
-## 🗂️ Folder Structure
+## Folder Structure
 
 ```
 src/
@@ -89,7 +89,7 @@ src/
 
 ---
 
-## 💡 Suggestions for Future Improvements
+## Suggestions for Future Improvements
 
 - Pagination or infinite scroll for comments and video list.
 - Improved error handling with user-friendly UI.
@@ -98,19 +98,19 @@ src/
 
 ---
 
-## 📄 License
+## License
 
 This project is for educational and assessment purposes only.
 
 ---
 
-## 🔗 Credits
+## Credits
 
 Original boilerplate provided by: [g-ioannidi5/youtube-viewer](https://github.com/g-ioannidi5/youtube-viewer)
 
 ---
 
-## ✅ Final Note
+## Final Note
 
 → The app runs fully with Redux, Hooks, and TypeScript.
 → Comments feature with replies and sorting is fully functional.
