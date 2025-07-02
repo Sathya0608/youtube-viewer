@@ -1,23 +1,118 @@
-This is a testing starter project using the Youtube API
+# 🎥 YouTube Viewer — Enhanced Version
 
-## Prerequisites
+This is an extended version of the YouTube Viewer starter project.
+→ Built with **React**, **Redux Toolkit**, **TypeScript**, and **Hooks**.
+→ Added functionality to preview comments and replies for each selected video.
 
-1. Add your own personal youtube API Key in App.js `const API_KEY = "ADD_API_KEY_HERE";`
-   you can generate one from the [Google Developer Console](https://console.developers.google.com/)
+---
 
-## Available Scripts
+## 🚀 Features Added
 
-In the project directory, you can run:
+- ✅ Search and play YouTube videos.
+- ✅ View **comments** for each selected video.
+- ✅ Expand/collapse **replies** for each comment.
+- ✅ Sort comments by **Top Comments** or **Newest First**.
+- ✅ Converted the entire app to **TypeScript** for type safety.
+- ✅ Refactored to use **React Hooks** and **Redux Toolkit** for state management.
+- ✅ Structured for a production-ready approach.
 
-### `yarn install` | `yarna`
+---
 
-Install all npm dependencies
+## 🛠️ Tech Stack
 
-### `yarn start`
+- React
+- Redux Toolkit
+- TypeScript
+- YouTube Data API v3
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-if localhost is not working because of the https redirect try Open [http://127.0.0.1:3000](http://127.0.0.1:3000)
+---
 
-The page will reload if you make edits.<br>
-You will also see any errors in the console.
+## 📆 Getting Started
+
+### 1️⃣ Clone the repository:
+
+```bash
+git clone https://github.com/Sathya0608/youtube-viewer.git
+cd youtube-viewer
+```
+
+### 2️⃣ Install dependencies:
+
+```bash
+yarn install
+# or
+npm install
+```
+
+### 3️⃣ Add API Key:
+
+- Open `App.tsx`.
+- Update this line with your API key:
+
+```ts
+const API_KEY = "YOUR_API_KEY";
+```
+
+- You can use the provided key:
+
+```
+AIzaSyCbcQMTPqAevOao2BQsQadm5SFTZljP2dM
+```
+
+- Or generate one from [Google Developer Console](https://console.developers.google.com/).
+
+---
+
+## 🔥 Run the Project:
+
+```bash
+yarn start
+# or
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) or [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
+
+---
+
+## 🗂️ Folder Structure
+
+```
+src/
+🔼︎ components/        // UI Components
+🔼︎ store/             // Redux slices and store setup
+🔼︎ types/             // TypeScript interfaces
+🔼︎ App.tsx            // Main app file
+🔼︎ App.css            // Styling
+🔼︎ index.tsx          // App entry point
+```
+
+---
+
+## 💡 Suggestions for Future Improvements
+
+- Pagination or infinite scroll for comments and video list.
+- Improved error handling with user-friendly UI.
+- Add a loading spinner for data fetches.
+- UI enhancements with Tailwind CSS or Material UI.
+
+---
+
+## 📄 License
+
+This project is for educational and assessment purposes only.
+
+---
+
+## 🔗 Credits
+
+Original boilerplate provided by: [g-ioannidi5/youtube-viewer](https://github.com/g-ioannidi5/youtube-viewer)
+
+---
+
+## ✅ Final Note
+
+→ The app runs fully with Redux, Hooks, and TypeScript.
+→ Comments feature with replies and sorting is fully functional.
+
+---
