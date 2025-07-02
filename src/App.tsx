@@ -54,7 +54,7 @@ const App: React.FC = () => {
           throw new Error(data.error?.message || "Error fetching comments");
         dispatch(setComments(data.items || []));
       } catch (error) {
-        alert("Failed to load comments. Try again later.");
+        console.log("Failed to load comments.");
       }
     },
     [dispatch]
