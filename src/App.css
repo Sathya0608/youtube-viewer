@@ -8,8 +8,8 @@
 }
 
 .comment-author {
-    font-weight: bold;
-    color: #0073e6;
+    font-weight: 600;
+    color: black;
 }
 
 .comment-text {
@@ -22,14 +22,15 @@
     margin-top: 8px;
     background-color: transparent;
     border: none;
-    color: #0073e6;
+    color: #065fd4;
     cursor: pointer;
-    padding: 0;
+    padding: 4px;
     outline: none;
 }
 
 .replies-button:hover {
-    text-decoration: underline;
+    background-color: #DEF1FF;
+    border-radius: 6px;
 }
 
 .replies-button:focus {
